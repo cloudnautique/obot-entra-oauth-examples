@@ -189,15 +189,12 @@ The Server App doesn't need admin consent — it only exposes a scope and has no
 
 ### 4. Configure the Obot gateway
 
-In your Obot instance, configure a credential with the values from the setup script output:
+In your Obot instance, setup a remote MCP server to point to the FastMCP instance. Under advanced settings configure a credential with the values from the setup script output:
 
 | Field | Value |
 |-------|-------|
 | Client ID | Client App ID from setup output |
 | Client Secret | Client Secret from setup output |
-| Authorization URL | `https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/authorize` |
-| Token URL | `https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token` |
-| Scopes | `api://{SERVER_APP_ID}/access_as_user User.Read Mail.Read offline_access` |
 
 ### 5. Add redirect URI
 
@@ -230,10 +227,6 @@ The server starts on `http://0.0.0.0:8000` with streamable HTTP transport.
 |-------|-------------|
 | Client App ID | The client app registration's application ID |
 | Client Secret | The client app's secret (for authorization code exchange) |
-| Server App ID | Used in scope URI (`api://{id}/access_as_user`) for consent boundary |
-| Authorization URL | Entra ID authorize endpoint for your tenant |
-| Token URL | Entra ID token endpoint for your tenant |
-| Auth Scopes | `api://{SERVER_APP_ID}/access_as_user User.Read Mail.Read offline_access` (all, for consent) |
 
 ## Tools
 
