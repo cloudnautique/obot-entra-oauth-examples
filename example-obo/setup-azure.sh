@@ -46,6 +46,13 @@ echo "Server App ID: $SERVER_APP_ID"
 az ad app update --id "$SERVER_APP_ID" \
     --identifier-uris "api://$SERVER_APP_ID"
 
+# Set access token version to v2 (must use Graph API directly — az ad app update doesn't support this)
+SERVER_OBJECT_ID=$(az ad app show --id "$SERVER_APP_ID" --query id -o tsv)
+az rest --method PATCH \
+    --uri "https://graph.microsoft.com/v1.0/applications/$SERVER_OBJECT_ID" \
+    --body '{"api":{"requestedAccessTokenVersion":2}}'
+echo "Set accessTokenAcceptedVersion=2 on server app"
+
 # Add access_as_user scope
 SCOPE_ID=$(uuidgen | tr '[:upper:]' '[:lower:]')
 az ad app update --id "$SERVER_APP_ID" \
