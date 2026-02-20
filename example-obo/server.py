@@ -138,8 +138,8 @@ class AzureJWTVerifier(JWTVerifier):
 
 token_verifier = AzureJWTVerifier(
     jwks_uri=oidc_metadata["jwks_uri"],
-    issuer=[oidc_metadata["issuer"]],
-    audience=identifier_uri,
+    issuer=oidc_metadata["issuer"],
+    audience=settings.azure_client_id,
     algorithm="RS256",
     required_scopes=[f"{identifier_uri}/access_as_user"],
     scope_prefix=identifier_uri,
